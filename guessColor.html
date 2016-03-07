@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+//Sidra Chaudhry
+//Coursera Assignment #2
+
+var target_index;
+var guess_input_text;
+var guess_input;
+var finished = false;
+var guesses = 0;
+var colors = ["Blue","Cyan","Green","Orange","Pink","Red","Yellow"];
+var i, list = "Colors: ";
+var length = colors.length;
+
+function do_game(){
+	var random_number_integer = Math.random() * length;
+	random_number_integer = Math.floor(random_number_integer);
+	target_index = colors[random_number_integer];
+	
+	for(i=0; i<length; i++){
+			list += colors[i] + ", ";
+	}
+	
+	while (!finished) {
+	
+		guess_input_text = prompt("I am thinking of one of these below. \n" + list + "\n\nWhat color am I thinking of? \n");
+		
+		guess_input = String(guess_input_text);
+		guesses += 1;
+		finished = check_guess();
+	}
+}
+
+function check_guess() {
+	var count = 0;
+	while(count != length){
+		if(guess_input != colors[count]){
+			count++;
+			}
+		else
+			break;
+		
+		if(count == length && guess_input != colors[count]){
+			alert("I don't recognize that color!");
+			return false;
+			}
+	}
+	
+	if(guess_input > target_index){
+		alert("Your input is alphabetically higher than mine!");
+		return false;		
+	}
+	if(guess_input < target_index){
+		alert("Your input is alphabetically lower than mine!");
+		return false;		
+	}
+	
+	document.body.style.backgroundColor= target_index;
+	alert("Congratulations. You've had " + guesses + " guesses!");
+	
+	return true;
+	
+}
+
+
+
+</script>
+
+</head>
+<body onload="do_game();">
+
+
+
+</body>
+</html> 
